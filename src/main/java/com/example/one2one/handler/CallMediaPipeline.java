@@ -15,20 +15,12 @@
  *
  */
 
-package com.example.one2one;
+package com.example.one2one.handler;
 
 import org.kurento.client.KurentoClient;
 import org.kurento.client.MediaPipeline;
 import org.kurento.client.WebRtcEndpoint;
 
-/**
- * Media Pipeline (WebRTC endpoints, i.e. Kurento Media Elements) and connections for the 1 to 1
- * video communication.
- *
- * @author Boni Garcia (bgarcia@gsyc.es)
- * @author Micael Gallego (micael.gallego@gmail.com)
- * @since 4.3.1
- */
 public class CallMediaPipeline {
 
     private MediaPipeline pipeline;

@@ -15,18 +15,27 @@
  *
  */
 
-package com.example.one2one;
+package com.example.one2one.handler;
 
+import com.example.one2one.model.UserSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-public class UserRegistry {
+public class UserRegistryHandle {
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     private ConcurrentHashMap<String, UserSession> usersByName = new ConcurrentHashMap<>();
     private ConcurrentHashMap<String, UserSession> usersBySessionId = new ConcurrentHashMap<>();
 
     public void register(UserSession user) {
+        redisTemplate.opsForValue().set("name:" + user.getName(), user);
+        redisTemplate.opsForValue().set("session:" + user.getSession().getId(), user);
+
         usersByName.put(user.getName(), user);
         usersBySessionId.put(user.getSession().getId(), user);
     }

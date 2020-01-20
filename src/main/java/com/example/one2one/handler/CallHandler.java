@@ -15,8 +15,9 @@
  *
  */
 
-package com.example.one2one;
+package com.example.one2one.handler;
 
+import com.example.one2one.model.UserSession;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -26,8 +27,6 @@ import org.kurento.client.IceCandidate;
 import org.kurento.client.IceCandidateFoundEvent;
 import org.kurento.client.KurentoClient;
 import org.kurento.jsonrpc.JsonUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -37,10 +36,9 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
-
+@Slf4j
 public class CallHandler extends TextWebSocketHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(CallHandler.class);
     private static final Gson gson = new GsonBuilder().create();
 
     private final ConcurrentHashMap<String, CallMediaPipeline> pipelines = new ConcurrentHashMap<>();
@@ -49,7 +47,7 @@ public class CallHandler extends TextWebSocketHandler {
     private KurentoClient kurento;
 
     @Autowired
-    private UserRegistry registry;
+    private UserRegistryHandle registry;
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
