@@ -32,12 +32,12 @@ const REGISTERED = 2;
 var iceservers={
 	"iceServers":[
 		{
-			urls:"stun:10.0.63.166:3478"
+			urls:"stun:35.229.161.234:3478"
 		},
 		{
-			urls:["turn:10.0.63.166:3478"],
-			username:"kurento",
-			credential: "kurento"
+			urls:["turn:35.229.161.234:3478"],
+			username:"otp8fa",
+			credential: "GBXFbiC8UCeMGXJq"
 		}
 	]
 }

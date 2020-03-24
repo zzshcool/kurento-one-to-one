@@ -4,6 +4,7 @@ package com.example.one2one;
 import com.example.one2one.handler.CallHandler;
 import com.example.one2one.handler.UserRegistryHandle;
 import org.kurento.client.KurentoClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -28,10 +29,14 @@ public class One2OneCallApp implements WebSocketConfigurer {
         return new UserRegistryHandle();
     }
 
+    @Value("${kurento.server.ip}")
+    private String kurentoIp;
+
+
     @Bean
     public KurentoClient kurentoClient() {
-        return KurentoClient.create();
-        //return  KurentoClient.create("ws://35.221.204.19:8888/kurento");
+        //return KurentoClient.create();
+        return KurentoClient.create(kurentoIp);
     }
 
     @Override

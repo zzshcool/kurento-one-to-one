@@ -26,16 +26,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class UserRegistryHandle {
 
-    @Autowired
-    private RedisTemplate redisTemplate;
 
     private ConcurrentHashMap<String, UserSession> usersByName = new ConcurrentHashMap<>();
     private ConcurrentHashMap<String, UserSession> usersBySessionId = new ConcurrentHashMap<>();
 
     public void register(UserSession user) {
-        redisTemplate.opsForValue().set("name:" + user.getName(), user);
-        redisTemplate.opsForValue().set("session:" + user.getSession().getId(), user);
-
         usersByName.put(user.getName(), user);
         usersBySessionId.put(user.getSession().getId(), user);
     }
